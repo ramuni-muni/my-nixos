@@ -43,7 +43,7 @@ stdenv.mkDerivation rec {
     # Add posix to the list of Vala dependencies
     # https://github.com/elementary/gala/pull/1472
     (fetchpatch {
-      url = "https://github.com/elementary/gala/commit/dd9c19008387e6e1ca6602ed1041b255c0915cbb.patch";
+      url = "https://github.com/elementary/gala/commit/fe1d3d031f6a85e25d82c72441ddcf0b8c248324.patch";
       sha256 = "sha256-8p+PIuk46xQBl92gZjga1FQQJ6blDynTUSsYup02S+A=";
     })
   ];
