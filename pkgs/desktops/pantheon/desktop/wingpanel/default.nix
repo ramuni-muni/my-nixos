@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchpatch
 , nix-update-script
 , wrapGAppsHook
 , pkg-config
@@ -22,17 +23,24 @@
 
 stdenv.mkDerivation rec {
   pname = "wingpanel";
-  version = "3.0.2";
+  version = "unstable-2022-10-13";
 
   src = fetchFromGitHub {
     owner = "elementary";
     repo = pname;
-    rev = version;
-    sha256 = "sha256-WvkQx+9YjKCINpyVg8KjCV0GAb0rJfblSFaO14/4oas=";
+    rev = "8be50d17eb10458f89a6c5e029c81e6f3042c6f9";
+    sha256 = "sha256-4PqBCzmMrX5zPuoGlRoMGe6jotll5ofPyCgJMBv6Lyw=";
   };
 
   patches = [
     ./indicators.patch
+
+    # Fix build with gala 6.3.2
+    # https://github.com/elementary/wingpanel/pull/470
+    (fetchpatch {
+      url = "https://github.com/elementary/wingpanel/commit/00aa43cf0d0653ccc563577360be500678fa1e53.patch";
+      sha256 = "sha256-JXAvR3r8LtGgegGbb62sVnrrpvbsaIhNx8Z0KfHElz4=";
+    })
   ];
 
   nativeBuildInputs = [
