@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, fetchpatch
 , nix-update-script
 , pkg-config
 , meson
@@ -38,6 +39,13 @@ stdenv.mkDerivation rec {
     # We look for plugins in `/run/current-system/sw/lib/` because
     # there are multiple plugin providers (e.g. gala and wingpanel).
     ./plugins-dir.patch
+
+    # Add posix to the list of Vala dependencies
+    # https://github.com/elementary/gala/pull/1472
+    (fetchpatch {
+      url = "https://github.com/elementary/gala/commit/dd9c19008387e6e1ca6602ed1041b255c0915cbb.patch";
+      sha256 = "sha256-8p+PIuk46xQBl92gZjga1FQQJ6blDynTUSsYup02S+A=";
+    })
   ];
 
   nativeBuildInputs = [
