@@ -1,7 +1,6 @@
 { lib
 , stdenv
 , fetchFromGitHub
-, fetchpatch
 , nix-update-script
 , wrapGAppsHook
 , pkg-config
@@ -34,13 +33,6 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./indicators.patch
-
-    # Fix build with gala 6.3.2
-    # https://github.com/elementary/wingpanel/pull/470
-    (fetchpatch {
-      url = "https://github.com/elementary/wingpanel/commit/00aa43cf0d0653ccc563577360be500678fa1e53.patch";
-      sha256 = "sha256-JXAvR3r8LtGgegGbb62sVnrrpvbsaIhNx8Z0KfHElz4=";
-    })
   ];
 
   nativeBuildInputs = [
